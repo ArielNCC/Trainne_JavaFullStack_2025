@@ -1,0 +1,7 @@
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:30:34 -0300] "GET /encuesta/lista-respuestas HTTP/1.1" 200 23475 http-bio-8080-exec-1 1780
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:30:36 -0300] "GET /encuesta/index.jsp HTTP/1.1" 200 1882 http-bio-8080-exec-3 82
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:30:37 -0300] "GET /encuesta/lista-respuestas HTTP/1.1" 200 23475 http-bio-8080-exec-4 7
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:30:43 -0300] "GET /encuesta/encuesta.jsp HTTP/1.1" 200 5386 http-bio-8080-exec-5 143
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:30:52 -0300] "POST /encuesta/procesar-encuesta HTTP/1.1" 200 5682 http-bio-8080-exec-6 140
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:31:01 -0300] "GET /encuesta/index.jsp HTTP/1.1" 200 1882 http-bio-8080-exec-7 3
+0:0:0:0:0:0:0:1 - - [18/Oct/2025:19:31:02 -0300] "GET /encuesta/lista-respuestas HTTP/1.1" 200 26085 http-bio-8080-exec-8 11
