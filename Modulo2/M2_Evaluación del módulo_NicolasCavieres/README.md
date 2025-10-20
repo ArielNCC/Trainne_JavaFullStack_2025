@@ -1,5 +1,13 @@
 # Evaluación Módulo 2 - Ciberseguridad
 
+## Instrucciones
+
+Para no descargar todo el modulo utilizar:
+| git pull <url>
+
+El comando completo sería
+| git pull <https://github.com/ArielNCC/Trainne_JavaFullStack_2025/tree/260277016cfb2c4992443a36c94e41d0722ee4f9/Modulo2/M2_Evaluaci%C3%B3n%20del%20m%C3%B3dulo_NicolasCavieres>
+
 Este proyecto forma parte del Bootcamp de JavaScript. Su objetivo es presentar consejos de ciberseguridad en un sitio web responsivo.
 
 ## 📁 Estructura
@@ -15,3 +23,4 @@ Este proyecto forma parte del Bootcamp de JavaScript. Su objetivo es presentar c
 - Diseño responsivo para móviles.
 - Tarjetas informativas con imágenes.
 - Separación modular de estilos.
+
