@@ -1,0 +1,67 @@
+{
+  "name": "portfolio-nicolas-ariel",
+  "version": "1.0.0",
+  "description": "Portfolio personal de Nicolas Ariel - Desarrollador Backend",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "live-server --port=3000",
+    "build": "echo 'Build process for production'",
+    "deploy": "echo 'Deploy to hosting service'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/[usuario]/portfolio-nicolas-ariel.git"
+  },
+  "keywords": [
+    "portfolio",
+    "javascript",
+    "html",
+    "css",
+    "bootstrap",
+    "jquery",
+    "frontend",
+    "responsive",
+    "web-development"
+  ],
+  "author": "Nicolas Ariel",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "jquery": "^3.7.1",
+    "@fortawesome/fontawesome-free": "^6.4.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "config": {
+    "theme": {
+      "primary": "#007bff",
+      "secondary": "#6c757d",
+      "success": "#28a745",
+      "warning": "#ffc107",
+      "danger": "#dc3545",
+      "info": "#17a2b8"
+    },
+    "contact": {
+      "email": "micorreo@midireccion.cl",
+      "phone": "+56 9 123456789",
+      "location": "Santiago - Chile",
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com"
+    },
+    "features": {
+      "darkMode": true,
+      "smoothScroll": true,
+      "animations": true,
+      "lazyLoading": true,
+      "contactForm": false,
+      "blog": false
+    }
+  }
+}

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS Code - Portafolio Nicolas Ariel</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- IDE Container -->
+    <div class="ide-container">
+        <!-- Title Bar -->
+        <div class="title-bar">
+            <div class="title-bar-left">
+                <div class="window-controls">
+                    <div class="control close"></div>
+                    <div class="control minimize"></div>
+                    <div class="control maximize"></div>
+                </div>
+                <span class="title-text">VS Code - Portafolio</span>
+            </div>
+            <div class="title-bar-center">
+                <span>Nicolás Ariel - Portafolio</span>
+            </div>
+            <div class="title-bar-right">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Activity Bar -->
+                <div class="activity-bar">
+                    <div class="activity-icon active" data-panel="explorer">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <div class="activity-icon" data-panel="github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="activity-icon" data-panel="linkedin">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="activity-icon" data-panel="technologies">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="activity-icon" data-panel="about">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <!-- Explorer Panel -->
+                <div class="sidebar-panel" id="explorer-panel">
+                    <div class="panel-header">
+                        <span>EXPLORADOR</span>
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <div class="file-tree">
+                        <div class="folder">
+                            <div class="folder-header">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-folder-open"></i>
+                                <span>PORTFOLIO</span>
+                            </div>
+                            <div class="folder-content">
+                                <div class="file active" data-file="inicio">
+                                    <i class="fab fa-html5 html-icon"></i>
+                                    <span>inicio.html</span>
+                                </div>
+                                <div class="file" data-file="github">
+                                    <i class="fab fa-github github-icon"></i>
+                                    <span>github.md</span>
+                                </div>
+                                <div class="file" data-file="linkedin">
+                                    <i class="fab fa-linkedin linkedin-icon"></i>
+                                    <span>linkedin.json</span>
+                                </div>
+                                <div class="file" data-file="technologies">
+                                    <i class="fab fa-js-square js-icon"></i>
+                                    <span>tecnologias.js</span>
+                                </div>
+                                <div class="file" data-file="about">
+                                    <i class="fas fa-user css-icon"></i>
+                                    <span>acerca-de-mi.css</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor-area">
+                <!-- Tab Bar -->
+                <div class="tab-bar">
+                    <div class="tab active" data-file="inicio">
+                        <i class="fab fa-html5"></i>
+                        <span>inicio.html</span>
+                        <i class="fas fa-times tab-close"></i>
+                    </div>
+                    <div class="tab" data-file="github">
+                        <i class="fab fa-github"></i>
+                        <span>github.md</span>
+                        <i class="fas fa-times tab-close"></i>
+                    </div>
+                    <div class="tab" data-file="linkedin">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.json</span>
+                        <i class="fas fa-times tab-close"></i>
+                    </div>
+                    <div class="tab" data-file="technologies">
+                        <i class="fab fa-js-square"></i>
+                        <span>tecnologias.js</span>
+                        <i class="fas fa-times tab-close"></i>
+                    </div>
+                    <div class="tab" data-file="about">
+                        <i class="fas fa-user"></i>
+                        <span>acerca-de-mi.css</span>
+                        <i class="fas fa-times tab-close"></i>
+                    </div>
+                </div>
+
+                <!-- Editor Content -->
+                <div class="editor-content">
+                    <!-- Inicio Content -->
+                    <div class="file-content active" id="inicio-content">
+                        <div class="line-numbers">
+                            <div class="line-number">1</div>
+                            <div class="line-number">2</div>
+                            <div class="line-number">3</div>
+                            <div class="line-number">4</div>
+                            <div class="line-number">5</div>
+                            <div class="line-number">6</div>
+                            <div class="line-number">7</div>
+                            <div class="line-number">8</div>
+                            <div class="line-number">9</div>
+                            <div class="line-number">10</div>
+                            <div class="line-number">11</div>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line"><span class="comment">/* ¡Bienvenido a mi espacio 👋! */</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="keyword">const</span> <span class="variable">desarrollador</span> = {</div>
+                            <div class="code-line">  <span class="property">nombre</span>: <span class="string">"Nicolás Ariel"</span>,</div>
+                            <div class="code-line">  <span class="property">role</span>: <span class="string">"Backend Developer en formación"</span>,</div>
+                            <div class="code-line">  <span class="property">passion</span>: [<span class="string">"lógica"</span>, <span class="string">"bases de datos"</span>, <span class="string">"soluciones innovadoras"</span>],</div>
+                            <div class="code-line">  <span class="property">misión</span>: <span class="string">"Crear soluciones que hagan más fácil la vida de los usuarios"</span></div>
+                            <div class="code-line">};</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="comment">// En este portafolio encontrarás mis proyectos, las tecnologías</span></div>
+                            <div class="code-line"><span class="comment">// que manejo y un poco más sobre mí. */</span></div>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Content -->
+                    <div class="file-content" id="github-content">
+                        <div class="line-numbers">
+                            <div class="line-number">1</div>
+                            <div class="line-number">2</div>
+                            <div class="line-number">3</div>
+                            <div class="line-number">4</div>
+                            <div class="line-number">5</div>
+                            <div class="line-number">6</div>
+                            <div class="line-number">7</div>
+                            <div class="line-number">8</div>
+                            <div class="line-number">9</div>
+                            <div class="line-number">10</div>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line"><span class="markdown-header"># GitHub Profile</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="markdown-header">## Mis Repositorios</span></div>
+                            <div class="code-line">Explora mis proyectos de desarrollo backend:</div>
+                            <div class="code-line">- APIs REST con Node.js y Express</div>
+                            <div class="code-line">- Aplicaciones con bases de datos MySQL y MongoDB</div>
+                            <div class="code-line">- Scripts de automatización en Python</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="markdown-header">## Lenguajes Principales</span></div>
+                            <div class="code-line">- JavaScript (Node.js, Express.js)</div>
+                            <div class="code-line">- Python</div>
+                            <div class="code-line">- SQL (MySQL, PostgreSQL)</div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Content -->
+                    <div class="file-content" id="linkedin-content">
+                        <div class="line-numbers">
+                            <div class="line-number">1</div>
+                            <div class="line-number">2</div>
+                            <div class="line-number">3</div>
+                            <div class="line-number">4</div>
+                            <div class="line-number">5</div>
+                            <div class="line-number">6</div>
+                            <div class="line-number">7</div>
+                            <div class="line-number">8</div>
+                            <div class="line-number">9</div>
+                            <div class="line-number">10</div>
+                            <div class="line-number">11</div>
+                            <div class="line-number">12</div>
+                            <div class="line-number">13</div>
+                            <div class="line-number">14</div>
+                            <div class="line-number">15</div>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line">{</div>
+                            <div class="code-line">  <span class="property">"profile"</span>: {</div>
+                            <div class="code-line">    <span class="property">"name"</span>: <span class="string">"Nicolas Ariel"</span>,</div>
+                            <div class="code-line">    <span class="property">"title"</span>: <span class="string">"Backend Developer en formación"</span>,</div>
+                            <div class="code-line">    <span class="property">"education"</span>: <span class="string">"Bootcamp JavaScript"</span>,</div>
+                            <div class="code-line">    <span class="property">"specialization"</span>: <span class="string">"Backend Development"</span>,</div>
+                            <div class="code-line">    <span class="property">"passion"</span>: <span class="string">"Soluciones Innovadoras"</span>,</div>
+                            <div class="code-line">    <span class="property">"skills"</span>: [</div>
+                            <div class="code-line">      <span class="string">"Node.js"</span>, <span class="string">"Express.js"</span>, <span class="string">"MongoDB"</span>,</div>
+                            <div class="code-line">      <span class="string">"MySQL"</span>, <span class="string">"Python"</span>, <span class="string">"Git"</span></div>
+                            <div class="code-line">    ],</div>
+                            <div class="code-line">    <span class="property">"status"</span>: <span class="string">"Abierto a oportunidades"</span></div>
+                            <div class="code-line">  }</div>
+                            <div class="code-line">}</div>
+                        </div>
+                    </div>
+
+                    <!-- Technologies Content -->
+                    <div class="file-content" id="technologies-content">
+                        <div class="line-numbers">
+                            <div class="line-number">1</div>
+                            <div class="line-number">2</div>
+                            <div class="line-number">3</div>
+                            <div class="line-number">4</div>
+                            <div class="line-number">5</div>
+                            <div class="line-number">6</div>
+                            <div class="line-number">7</div>
+                            <div class="line-number">8</div>
+                            <div class="line-number">9</div>
+                            <div class="line-number">10</div>
+                            <div class="line-number">11</div>
+                            <div class="line-number">12</div>
+                            <div class="line-number">13</div>
+                            <div class="line-number">14</div>
+                            <div class="line-number">15</div>
+                            <div class="line-number">16</div>
+                            <div class="line-number">17</div>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line"><span class="keyword">const</span> <span class="variable">technologies</span> = {</div>
+                            <div class="code-line">  <span class="property">backend</span>: {</div>
+                            <div class="code-line">    <span class="property">languages</span>: [<span class="string">"JavaScript"</span>, <span class="string">"Python"</span>],</div>
+                            <div class="code-line">    <span class="property">frameworks</span>: [<span class="string">"Node.js"</span>, <span class="string">"Express.js"</span>],</div>
+                            <div class="code-line">  },</div>
+                            <div class="code-line">  <span class="property">databases</span>: {</div>
+                            <div class="code-line">    <span class="property">sql</span>: [<span class="string">"MySQL"</span>, <span class="string">"PostgreSQL"</span>],</div>
+                            <div class="code-line">    <span class="property">nosql</span>: [<span class="string">"MongoDB"</span>],</div>
+                            <div class="code-line">  },</div>
+                            <div class="code-line">  <span class="property">tools</span>: {</div>
+                            <div class="code-line">    <span class="property">versionControl</span>: [<span class="string">"Git"</span>, <span class="string">"GitHub"</span>],</div>
+                            <div class="code-line">    <span class="property">editor</span>: [<span class="string">"VS Code"</span>],</div>
+                            <div class="code-line">    <span class="property">"api-testing"</span>: [<span class="string">"Postman"</span>],</div>
+                            <div class="code-line">    <span class="property">containerization</span>: [<span class="string">"Docker"</span>]</div>
+                            <div class="code-line">  }</div>
+                            <div class="code-line">};</div>
+                        </div>
+                    </div>
+
+                    <!-- About Content -->
+                    <div class="file-content" id="about-content">
+                        <div class="line-numbers">
+                            <div class="line-number">1</div>
+                            <div class="line-number">2</div>
+                            <div class="line-number">3</div>
+                            <div class="line-number">4</div>
+                            <div class="line-number">5</div>
+                            <div class="line-number">6</div>
+                            <div class="line-number">7</div>
+                            <div class="line-number">8</div>
+                            <div class="line-number">9</div>
+                            <div class="line-number">10</div>
+                            <div class="line-number">11</div>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line"><span class="css-selector">.nicolas-ariel</span> {</div>
+                            <div class="code-line">  <span class="css-property">position</span>: <span class="css-value">developer</span>;</div>
+                            <div class="code-line">  <span class="css-property">location</span>: <span class="css-value">Santiago, Chile</span>;</div>
+                            <div class="code-line">  <span class="css-property">email</span>: <span class="css-value">micorreo@midireccion.cl</span>;</div>
+                            <div class="code-line">  <span class="css-property">phone</span>: <span class="css-value">+56 9 123456789</span>;</div>
+                            <div class="code-line">  <span class="css-property">passion</span>: <span class="css-value">backend-development</span>;</div>
+                            <div class="code-line">  <span class="css-property">specialization</span>: <span class="css-value">databases logic</span>;</div>
+                            <div class="code-line">  <span class="css-property">goal</span>: <span class="css-value">innovative-solutions</span>;</div>
+                            <div class="code-line">  <span class="css-property">status</span>: <span class="css-value">learning growing</span>;</div>
+                            <div class="code-line">  <span class="css-property">availability</span>: <span class="css-value">open-to-collaborate</span>;</div>
+                            <div class="code-line">}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-tabs">
+                    <div class="terminal-tab active">
+                        <span>Terminal</span>
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="terminal-controls">
+                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-trash"></i>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+            </div>
+            <div class="terminal-content">
+                <div class="terminal-line">
+                    <span class="prompt">C:\ariel\contacto></span> <span class="command">ls</span> <span class="output">dirección</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output-text">- Santiago - Chile</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">C:\ariel\contacto></span> <span class="command">dir</span> <span class="output">teléfono</span> <span class="command">mostrar</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output-text">+56 9 123456789</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">C:\ariel\contacto></span> <span class="command">abrir</span> <span class="output">correo.txt</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="output-text">micorreo@midireccion.cl</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="prompt">C:\ariel\contacto></span> <span class="cursor">|</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>

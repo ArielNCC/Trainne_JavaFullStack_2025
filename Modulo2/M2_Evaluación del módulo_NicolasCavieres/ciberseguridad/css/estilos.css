@@ -1,0 +1,33 @@
+/* Agrega sombra a los textos blancos para que sean más legibles sobre fondos oscuros */
+.text-white, .navbar-dark .navbar-brand, .navbar-dark .nav-link, .hero-image .text-white, .bg-dark.text-white, .carousel .text-white {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7), 0 1px 2px rgba(0,0,0,0.5);
+}
+/* Imagen de fondo principal de la página de inicio */
+.hero-image {
+  background: url('../img/hero-ciberseguridad.jpg') center/cover no-repeat;
+  height: 40vh; /* Altura relativa a la ventana */
+  min-height: 57vh; /* Altura mínima para pantallas grandes */
+}
+/* Imágenes de las tarjetas de amenazas, tamaño y recorte */
+.threat-card img {
+  height: 7.5rem;
+  object-fit: cover;
+}
+/* Caja de ejemplo para mostrar información adicional sobre amenazas */
+.threat-example {
+  background: #eaf3ff;
+  border-left: 3px solid #0d6efd;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+/* Ajustes para pantallas pequeñas (móviles/tablets) */
+@media (max-width: 768px) {
+  .hero-image {
+    height: 25vh; /* Reduce la altura de la imagen principal en móviles */
+  }
+  .threat-card img {
+    height: 5rem; /* Reduce el tamaño de las imágenes de amenazas en móviles */
+  }
+}
+
+/* comentario para commit 2 */
