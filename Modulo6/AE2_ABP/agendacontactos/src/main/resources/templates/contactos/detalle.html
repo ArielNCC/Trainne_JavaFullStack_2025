@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Contacto - Agenda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" th:href="@{/}">
+                <i class="fas fa-address-book me-2"></i>
+                Agenda de Contactos
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" th:href="@{/}">
+                        <i class="fas fa-home me-1"></i>Inicio
+                    </a>
+                    <a class="nav-link" th:href="@{/contactos/listar}">
+                        <i class="fas fa-list me-1"></i>Ver Todos
+                    </a>
+                    <a class="nav-link" th:href="@{/contactos/nuevo}">
+                        <i class="fas fa-plus me-1"></i>Nuevo Contacto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Detail Header -->
+    <section class="bg-primary text-white py-5 mb-4">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-8">
+                    <div class="bg-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center border border-3" 
+                         style="width: 100px; height: 100px;">
+                        <span class="text-primary fw-bold fs-1" th:text="${#strings.substring(contacto.nombre, 0, 1)}">A</span>
+                    </div>
+                    <h1 class="display-5 fw-bold mb-2" th:text="${contacto.nombre}">Nombre del Contacto</h1>
+                    <p class="lead mb-0">Información detallada del contacto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <!-- Tarjeta principal del contacto -->
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-user me-2"></i>
+                            Detalle del Contacto
+                        </h4>
+                    </div>
+                    <div class="card-body text-center p-4">
+                        <!-- Avatar -->
+                        <div class="mb-4">
+                            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" 
+                                 style="width: 80px; height: 80px; font-size: 2rem;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+
+                        <!-- Información del contacto -->
+                        <h2 class="mb-4" th:text="${contacto.nombre}">Nombre del Contacto</h2>
+                        
+                        <div class="row text-start">
+                            <div class="col-12 mb-3">
+                                <div class="d-flex align-items-center p-3 bg-light rounded">
+                                    <i class="fas fa-envelope fa-lg text-primary me-3"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Correo Electrónico</small>
+                                        <strong th:text="${contacto.correo}">email@example.com</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 mb-3">
+                                <div class="d-flex align-items-center p-3 bg-light rounded">
+                                    <i class="fas fa-phone fa-lg text-success me-3"></i>
+                                    <div>
+                                        <small class="text-muted d-block">Número de Teléfono</small>
+                                        <strong th:text="${contacto.telefono}">+1234567890</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <div class="d-flex align-items-center p-3 bg-light rounded">
+                                    <i class="fas fa-hashtag fa-lg text-info me-3"></i>
+                                    <div>
+                                        <small class="text-muted d-block">ID del Contacto</small>
+                                        <strong th:text="${contacto.id}">1</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Acciones -->
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/contactos/listar}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Volver a la Lista
+                            </a>
+                            
+                            <div>
+                                <a th:href="@{/contactos/{id}/editar(id=${contacto.id})}" 
+                                   class="btn btn-warning me-2">
+                                    <i class="fas fa-edit me-2"></i>Editar
+                                </a>
+                                
+                                <button type="button" 
+                                        class="btn btn-danger" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modalEliminar">
+                                    <i class="fas fa-trash me-2"></i>Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones rápidas -->
+                <div class="card mt-3 bg-light">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <i class="fas fa-bolt text-warning me-2"></i>Acciones Rápidas
+                        </h6>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <a th:href="'mailto:' + ${contacto.correo}" class="btn btn-outline-primary">
+                                <i class="fas fa-envelope me-2"></i>Enviar Email
+                            </a>
+                            <a th:href="'tel:' + ${contacto.telefono}" class="btn btn-outline-success">
+                                <i class="fas fa-phone me-2"></i>Llamar
+                            </a>
+                            <button class="btn btn-outline-info" onclick="copyToClipboard()">
+                                <i class="fas fa-copy me-2"></i>Copiar Info
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para eliminar -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center p-4">
+                    <i class="fas fa-exclamation-triangle display-4 text-danger mb-3"></i>
+                    <p>¿Estás seguro de que deseas eliminar el contacto 
+                    <strong th:text="${contacto.nombre}">Nombre</strong>?</p>
+                    <small class="text-muted">Esta acción no se puede deshacer.</small>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form th:action="@{/contactos/{id}/eliminar(id=${contacto.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash me-2"></i>Eliminar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function copyToClipboard() {
+            const contactInfo = `Nombre: ${document.querySelector('[th\\:text="${contacto.nombre}"]').textContent}
+Correo: ${document.querySelector('[th\\:text="${contacto.correo}"]').textContent}
+Teléfono: ${document.querySelector('[th\\:text="${contacto.telefono}"]').textContent}`;
+            
+            navigator.clipboard.writeText(contactInfo).then(function() {
+                alert('Información del contacto copiada al portapapeles');
+            }).catch(function(err) {
+                console.error('Error al copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

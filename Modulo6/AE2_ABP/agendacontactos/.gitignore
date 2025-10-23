@@ -1,0 +1,98 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+
+# Maven/Gradle build output
+target/
+build/
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Local config
+application-local.properties
+.env
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Node dependencies
+node_modules/
+
+# Test output and coverage
+test-output/
+coverage/
+
+# Database files
+*.db
+*.sqlite
+
+# Docker generated files
+*.pid
+
+# Ignore generated WAR/JAR
+*.war
+*.jar
+
+# Allow only necessary files
+!src/
+!pom.xml
+!README.md
+!HELP.md
+!mvnw
+!mvnw.cmd
+!init.sql
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
