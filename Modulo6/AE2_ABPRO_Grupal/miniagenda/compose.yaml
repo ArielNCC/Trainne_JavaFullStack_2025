@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: miniagenda_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: miniagenda
+      MYSQL_USER: miniagendauser
+      MYSQL_PASSWORD: agenda123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - agenda_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: miniagenda_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+    networks:
+      - agenda_network
+
+volumes:
+  mysql_data:
+
+networks:
+  agenda_network:
+    driver: bridge

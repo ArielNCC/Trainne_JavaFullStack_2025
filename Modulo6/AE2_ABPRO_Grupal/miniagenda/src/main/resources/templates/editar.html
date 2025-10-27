@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Evento - Mini Agenda</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .form-container {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #fd7e14, #dc3545);
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center justify-content-center min-vh-100 p-4">
+    <div class="form-container bg-white rounded-4 shadow border overflow-hidden" style="max-width: 500px; width: 100%;">
+        <div class="form-header text-white p-4 text-center">
+            <h1 class="h3 fw-bold mb-2">
+                <i class="bi bi-pencil-square me-2"></i>Editar Evento
+            </h1>
+            <p class="mb-0 opacity-75">Modifica los datos del evento seleccionado</p>
+        </div>
+        
+        <div class="p-4">
+            <form th:action="@{/agenda/modificar}" th:object="${comando}" method="post">
+                
+                <!-- Campo oculto para el ID -->
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="mb-4">
+                    <label for="titulo" class="form-label fw-semibold text-secondary small">
+                        <i class="bi bi-card-heading me-1"></i>Título del Evento *
+                    </label>
+                    <input type="text" 
+                           id="titulo" 
+                           th:field="*{titulo}" 
+                           th:classappend="${#fields.hasErrors('titulo')} ? 'is-invalid' : ''"
+                           class="form-control form-control-lg bg-light border-2 rounded-3"
+                           placeholder="Ej: Reunión de equipo">
+                    <div th:if="${#fields.hasErrors('titulo')}" class="invalid-feedback">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        <span th:errors="*{titulo}"></span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="fecha" class="form-label fw-semibold text-secondary small">
+                        <i class="bi bi-calendar-date me-1"></i>Fecha *
+                    </label>
+                    <input type="date" 
+                           id="fecha" 
+                           th:field="*{fecha}" 
+                           th:classappend="${#fields.hasErrors('fecha')} ? 'is-invalid' : ''"
+                           class="form-control form-control-lg bg-light border-2 rounded-3">
+                    <div th:if="${#fields.hasErrors('fecha')}" class="invalid-feedback">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        <span th:errors="*{fecha}"></span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="descripcion" class="form-label fw-semibold text-secondary small">
+                        <i class="bi bi-card-text me-1"></i>Descripción *
+                    </label>
+                    <textarea id="descripcion" 
+                              th:field="*{descripcion}" 
+                              th:classappend="${#fields.hasErrors('descripcion')} ? 'is-invalid' : ''"
+                              class="form-control bg-light border-2 rounded-3"
+                              rows="4"
+                              placeholder="Describe los detalles del evento..."></textarea>
+                    <div th:if="${#fields.hasErrors('descripcion')}" class="invalid-feedback">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        <span th:errors="*{descripcion}"></span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="responsable" class="form-label fw-semibold text-secondary small">
+                        <i class="bi bi-person-circle me-1"></i>Responsable *
+                    </label>
+                    <input type="text" 
+                           id="responsable" 
+                           th:field="*{responsable}" 
+                           th:classappend="${#fields.hasErrors('responsable')} ? 'is-invalid' : ''"
+                           class="form-control form-control-lg bg-light border-2 rounded-3"
+                           placeholder="Nombre del responsable">
+                    <div th:if="${#fields.hasErrors('responsable')}" class="invalid-feedback">
+                        <i class="bi bi-exclamation-circle me-1"></i>
+                        <span th:errors="*{responsable}"></span>
+                    </div>
+                </div>
+                
+                <div class="d-flex gap-3 mt-4">
+                    <button type="submit" class="btn btn-warning btn-lg rounded-3 shadow-sm flex-fill">
+                        <i class="bi bi-check-circle me-1"></i>Guardar Cambios
+                    </button>
+                    <button type="button" class="btn btn-light btn-lg rounded-3 flex-fill" 
+                            onclick="window.location.href='/agenda/eventos'">
+                        <i class="bi bi-x-circle me-1"></i>Cancelar
+                    </button>
+                </div>
+            </form>
+            
+            <a th:href="@{/agenda/eventos}" class="d-inline-flex align-items-center mt-3 text-decoration-none text-warning fw-medium small">
+                <i class="bi bi-arrow-left me-1"></i>Volver a la lista de eventos
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
