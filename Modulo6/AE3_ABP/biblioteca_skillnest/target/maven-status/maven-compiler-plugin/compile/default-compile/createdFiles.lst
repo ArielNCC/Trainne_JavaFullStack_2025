@@ -1,0 +1,17 @@
+com\skillnest\web\models\AutorDTO.class
+com\skillnest\web\controllers\InicioController.class
+com\skillnest\web\controllers\AutorController.class
+com\skillnest\web\models\Libro.class
+com\skillnest\web\repositories\LibroDao.class
+com\skillnest\web\services\AutorService.class
+com\skillnest\web\BibliotecaSkillnestApplication.class
+com\skillnest\web\services\LibroService.class
+com\skillnest\web\controllers\LibroController.class
+com\skillnest\web\repositories\LibroRepository.class
+com\skillnest\web\repositories\AutorDao.class
+com\skillnest\web\ServletInitializer.class
+com\skillnest\web\repositories\AutorRepository.class
+com\skillnest\web\models\LibroDTO.class
+com\skillnest\web\rowmappers\LibroRowMapper.class
+com\skillnest\web\rowmappers\AutorRowMapper.class
+com\skillnest\web\models\Autor.class
