@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Registro - SkillNest</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="text-center mb-4">Crear Cuenta</h3>
+						
+						<form th:action="@{/registro/guardar}" th:object="${usuario}" method="post">
+							<div class="mb-3">
+								<label for="username" class="form-label">Usuario</label>
+								<input type="text" id="username" th:field="*{username}" class="form-control">
+								<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger small"></span>
+							</div>
+							
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label>
+								<input type="email" id="email" th:field="*{email}" class="form-control">
+								<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger small"></span>
+							</div>
+							
+							<div class="mb-3">
+								<label for="role" class="form-label">Rol</label>
+								<select id="role" th:field="*{role}" class="form-select">
+									<option value="">Selecciona un rol</option>
+									<option value="USER">Usuario</option>
+									<option value="ADMIN">Administrador</option>
+								</select>
+								<span th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="text-danger small"></span>
+							</div>
+							
+							<div class="mb-3">
+								<label for="password" class="form-label">Contraseña</label>
+								<input type="password" id="password" th:field="*{password}" class="form-control">
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small"></span>
+							</div>
+							
+							<button type="submit" class="btn btn-primary w-100">Registrar</button>
+						</form>
+						
+						<hr>
+						<p class="text-center">
+							¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

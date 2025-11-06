@@ -1,0 +1,40 @@
+# Maven
+/target/
+*.iml
+*.log
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.ipr
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+
+# Database
+*.sql
+*.db
+
+# Dependencies
+node_modules/

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Mi Perfil</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/panel">SkillNest</a>
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item"><a class="nav-link" href="/panel">Panel</a></li>
+					<li class="nav-item" sec:authorize="hasRole('ADMIN')"><a class="nav-link" href="/admin/detalle">Admin</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/perfil/detalle">Perfil</a></li>
+				</ul>
+				<span class="navbar-text text-white me-3">
+					Usuario: <strong sec:authentication="name">Usuario</strong>
+				</span>
+				<form th:action="@{/logout}" method="post" class="d-inline">
+					<button type="submit" class="btn btn-outline-light btn-sm">Cerrar Sesión</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container mt-4">
+		<h2>Mi Perfil</h2>
+		<p class="text-muted">Información personal del usuario autenticado</p>
+		
+		<div class="row mt-4">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">Información del Perfil</div>
+					<div class="card-body">
+						<table class="table table-borderless">
+							<tbody>
+								<tr>
+									<th style="width: 30%;">Usuario:</th>
+									<td sec:authentication="name">username</td>
+								</tr>
+								<tr>
+									<th>Email:</th>
+									<td th:text="${usuario != null ? usuario.email : 'No disponible'}">email@example.com</td>
+								</tr>
+								<tr>
+									<th>Rol:</th>
+									<td sec:authentication="principal.authorities">ROLE</td>
+								</tr>
+								<tr>
+									<th>ID:</th>
+									<td th:text="${usuario != null ? usuario.id : 'No disponible'}">1</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
