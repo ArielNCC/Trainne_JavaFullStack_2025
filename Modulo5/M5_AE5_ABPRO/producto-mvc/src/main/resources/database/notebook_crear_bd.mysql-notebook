@@ -1,0 +1,963 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\n-- Crear la base de datos si no existe\nCREATE DATABASE IF NOT EXISTS tienda_online;\nUSE tienda_online;\n-- Tabla de usuarios para el login\nCREATE TABLE IF NOT EXISTS usuarios (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    username VARCHAR(50) NOT NULL UNIQUE,\n    password VARCHAR(100) NOT NULL,\n    nombre_completo VARCHAR(100) NOT NULL,\n    email VARCHAR(100) NOT NULL,\n    activo BOOLEAN DEFAULT TRUE,\n    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n);\n-- Tabla de productos\nCREATE TABLE IF NOT EXISTS productos (\n    id INT AUTO_INCREMENT PRIMARY KEY,\n    nombre VARCHAR(100) NOT NULL,\n    descripcion TEXT,\n    precio DECIMAL(10, 2) NOT NULL,\n    stock INT NOT NULL DEFAULT 0,\n    categoria VARCHAR(50),\n    activo BOOLEAN DEFAULT TRUE,\n    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP\n);\n-- Insertar usuarios de ejemplo\nINSERT INTO usuarios (username, password, nombre_completo, email) VALUES\n('admin', 'admin123', 'Administrador Sistema', 'admin@tienda.com'),\n('usuario1', 'user123', 'Juan Pérez', 'juan@tienda.com'),\n('usuario2', 'user123', 'María González', 'maria@tienda.com');\n\n-- Insertar productos de ejemplo\nINSERT INTO productos (nombre, descripcion, precio, stock, categoria) VALUES\n('Laptop HP Pavilion', 'Laptop HP Pavilion 15, Intel Core i5, 8GB RAM, 256GB SSD', 699.99, 15, 'Computadoras'),\n('Mouse Logitech MX', 'Mouse inalámbrico ergonómico Logitech MX Master 3', 89.99, 50, 'Accesorios'),\n('Teclado Mecánico', 'Teclado mecánico RGB con switches Cherry MX Blue', 129.99, 30, 'Accesorios'),\n('Monitor Samsung 27\"', 'Monitor Samsung 27 pulgadas, Full HD, 75Hz', 249.99, 20, 'Monitores'),\n('Auriculares Sony', 'Auriculares Sony WH-1000XM4 con cancelación de ruido', 299.99, 25, 'Audio'),\n('Webcam Logitech', 'Webcam Logitech C920 HD Pro, 1080p', 79.99, 40, 'Accesorios'),\n('SSD Samsung 1TB', 'Disco SSD Samsung 970 EVO Plus NVMe M.2 1TB', 149.99, 35, 'Almacenamiento'),\n('RAM Corsair 16GB', 'Memoria RAM Corsair Vengeance 16GB DDR4 3200MHz', 89.99, 45, 'Componentes'),\n('Impresora HP', 'Impresora multifuncional HP DeskJet 3755', 99.99, 18, 'Impresoras'),\n('Router TP-Link', 'Router inalámbrico TP-Link Archer AX50 WiFi 6', 119.99, 22, 'Redes');\n\nCOMMIT;\n-- Consultas de verificación\nSELECT 'Usuarios creados:' AS Info;\nSELECT * FROM usuarios;\nSELECT 'Productos creados:' AS Info;\nSELECT * FROM productos;\n\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 53,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 53,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 1,
+                "column": 1
+            },
+            "firstPositionDeltaTop": 0
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 118.390625,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 4,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "090a47ee-5114-4848-ab92-3974d37327a6",
+                            "content": "OK, 1 row affected in 31.708ms"
+                        },
+                        {
+                            "type": 2,
+                            "index": 1,
+                            "resultId": "30349385-a40a-4ea2-8c88-f419801aff43",
+                            "content": "OK, 0 records retrieved in 1.538ms"
+                        }
+                    ]
+                },
+                "currentHeight": 44.796875,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 83
+                        },
+                        "contentStart": 39,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 83,
+                            "length": 19
+                        },
+                        "contentStart": 84,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 5,
+                "end": 14,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "ff1b61b8-3529-45b4-bb21-d755914e1f55",
+                            "content": "OK, 0 records retrieved in 138.191ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 356
+                        },
+                        "contentStart": 35,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 15,
+                "end": 26,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "a2c74594-ec63-482d-c994-1ba1a34995c2",
+                            "content": "OK, 0 records retrieved in 165.525ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 431
+                        },
+                        "contentStart": 22,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 27,
+                "end": 32,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 0,
+                            "index": 0,
+                            "content": "MySQL Error (1062): Duplicate entry 'admin' for key 'usuarios.username'",
+                            "language": "ansi"
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": ""
+                    }
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 293
+                        },
+                        "contentStart": 32,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 293,
+                            "length": 1
+                        },
+                        "contentStart": 292,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 33,
+                "end": 45,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "e036baac-2077-4836-8743-260ecd0c7004",
+                            "content": "OK, 10 rows affected in 28.917ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 1075
+                        },
+                        "contentStart": 33,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1075,
+                            "length": 1
+                        },
+                        "contentStart": 1074,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 46,
+                "end": 46,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "65de28e9-9f7d-4af9-e479-eabcdf7d8457",
+                            "content": "OK, 0 records retrieved in 2.151ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 7
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 47,
+                "end": 49,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "48d873d0-52b5-4d2e-8a90-2f464c00f836",
+                        "d1df0c9f-5e62-4b0a-fbc5-90f2f37f3b9f"
+                    ]
+                },
+                "currentHeight": 165.390625,
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 64
+                        },
+                        "contentStart": 29,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 64,
+                            "length": 24
+                        },
+                        "contentStart": 65,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "f96fb125-cda4-4b4c-ba95-3bf0864b30ab",
+                    "resultId": "48d873d0-52b5-4d2e-8a90-2f464c00f836",
+                    "rows": [
+                        {
+                            "0": "Usuarios creados:"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Info",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.974ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "-- Consultas de verificación\nSELECT 'Usuarios creados:' AS Info",
+                    "updatable": false,
+                    "fullTableName": ""
+                },
+                {
+                    "tabId": "f96fb125-cda4-4b4c-ba95-3bf0864b30ab",
+                    "resultId": "d1df0c9f-5e62-4b0a-fbc5-90f2f37f3b9f",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "admin",
+                            "2": "admin123",
+                            "3": "Administrador Sistema",
+                            "4": "admin@tienda.com",
+                            "5": 1,
+                            "6": "2025-11-13 12:54:34"
+                        },
+                        {
+                            "0": 2,
+                            "1": "usuario1",
+                            "2": "user123",
+                            "3": "Juan Pérez",
+                            "4": "juan@tienda.com",
+                            "5": 1,
+                            "6": "2025-11-13 12:54:34"
+                        },
+                        {
+                            "0": 3,
+                            "1": "usuario2",
+                            "2": "user123",
+                            "3": "María González",
+                            "4": "maria@tienda.com",
+                            "5": 1,
+                            "6": "2025-11-13 12:54:34"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": true
+                        },
+                        {
+                            "title": "username",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "password",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "nombre_completo",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "email",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "activo",
+                            "field": "5",
+                            "dataType": {
+                                "type": 42,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": "1"
+                        },
+                        {
+                            "title": "fecha_registro",
+                            "field": "6",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": "CURRENT_TIMESTAMP"
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 3 records retrieved in 2.54ms"
+                    },
+                    "totalRowCount": 3,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 1,
+                    "sql": "\nSELECT * FROM usuarios",
+                    "updatable": true,
+                    "fullTableName": "usuarios"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 50,
+                "end": 51,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f9bcf14f-4b89-4ef5-c09a-1846f4584d28",
+                        "891cda67-3cbb-4008-ba6b-25ce419ba0ab"
+                    ]
+                },
+                "currentHeight": 352,
+                "currentSet": 2,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 36
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 36,
+                            "length": 25
+                        },
+                        "contentStart": 37,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "f96fb125-cda4-4b4c-ba95-3bf0864b30ab",
+                    "resultId": "f9bcf14f-4b89-4ef5-c09a-1846f4584d28",
+                    "rows": [
+                        {
+                            "0": "Productos creados:"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "Info",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 1 record retrieved in 1.623ms"
+                    },
+                    "totalRowCount": 1,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT 'Productos creados:' AS Info",
+                    "updatable": false,
+                    "fullTableName": ""
+                },
+                {
+                    "tabId": "f96fb125-cda4-4b4c-ba95-3bf0864b30ab",
+                    "resultId": "891cda67-3cbb-4008-ba6b-25ce419ba0ab",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "Laptop HP Pavilion",
+                            "2": "Laptop HP Pavilion 15, Intel Core i5, 8GB RAM, 256GB SSD",
+                            "3": "699.99",
+                            "4": 15,
+                            "5": "Computadoras",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 2,
+                            "1": "Mouse Logitech MX",
+                            "2": "Mouse inalámbrico ergonómico Logitech MX Master 3",
+                            "3": "89.99",
+                            "4": 50,
+                            "5": "Accesorios",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 3,
+                            "1": "Teclado Mecánico",
+                            "2": "Teclado mecánico RGB con switches Cherry MX Blue",
+                            "3": "129.99",
+                            "4": 30,
+                            "5": "Accesorios",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 4,
+                            "1": "Monitor Samsung 27\"",
+                            "2": "Monitor Samsung 27 pulgadas, Full HD, 75Hz",
+                            "3": "249.99",
+                            "4": 20,
+                            "5": "Monitores",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 5,
+                            "1": "Auriculares Sony",
+                            "2": "Auriculares Sony WH-1000XM4 con cancelación de ruido",
+                            "3": "299.99",
+                            "4": 25,
+                            "5": "Audio",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 6,
+                            "1": "Webcam Logitech",
+                            "2": "Webcam Logitech C920 HD Pro, 1080p",
+                            "3": "79.99",
+                            "4": 40,
+                            "5": "Accesorios",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 7,
+                            "1": "SSD Samsung 1TB",
+                            "2": "Disco SSD Samsung 970 EVO Plus NVMe M.2 1TB",
+                            "3": "149.99",
+                            "4": 35,
+                            "5": "Almacenamiento",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 8,
+                            "1": "RAM Corsair 16GB",
+                            "2": "Memoria RAM Corsair Vengeance 16GB DDR4 3200MHz",
+                            "3": "89.99",
+                            "4": 45,
+                            "5": "Componentes",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 9,
+                            "1": "Impresora HP",
+                            "2": "Impresora multifuncional HP DeskJet 3755",
+                            "3": "99.99",
+                            "4": 18,
+                            "5": "Impresoras",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        },
+                        {
+                            "0": 10,
+                            "1": "Router TP-Link",
+                            "2": "Router inalámbrico TP-Link Archer AX50 WiFi 6",
+                            "3": "119.99",
+                            "4": 22,
+                            "5": "Redes",
+                            "6": 1,
+                            "7": "2025-11-13 12:56:35",
+                            "8": "2025-11-13 12:56:35"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": true,
+                            "nullable": false,
+                            "autoIncrement": true
+                        },
+                        {
+                            "title": "nombre",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "descripcion",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "precio",
+                            "field": "3",
+                            "dataType": {
+                                "type": 10,
+                                "flags": [
+                                    "UNSIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 65,
+                                "numericScale": 30,
+                                "parameterFormatType": "TwoOrOneOrZero",
+                                "synonyms": [
+                                    "FIXED",
+                                    "NUMERIC",
+                                    "DEC"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false
+                        },
+                        {
+                            "title": "stock",
+                            "field": "4",
+                            "dataType": {
+                                "type": 4,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": false,
+                            "autoIncrement": false,
+                            "default": "0"
+                        },
+                        {
+                            "title": "categoria",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17,
+                                "characterMaximumLength": 65535,
+                                "flags": [
+                                    "BINARY",
+                                    "ASCII",
+                                    "UNICODE"
+                                ],
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": null
+                        },
+                        {
+                            "title": "activo",
+                            "field": "6",
+                            "dataType": {
+                                "type": 42,
+                                "flags": [
+                                    "SIGNED",
+                                    "ZEROFILL"
+                                ],
+                                "numericPrecision": 10,
+                                "parameterFormatType": "OneOrZero",
+                                "synonyms": [
+                                    "INTEGER",
+                                    "INT4"
+                                ]
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": "1"
+                        },
+                        {
+                            "title": "fecha_creacion",
+                            "field": "7",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": "CURRENT_TIMESTAMP"
+                        },
+                        {
+                            "title": "fecha_modificacion",
+                            "field": "8",
+                            "dataType": {
+                                "type": 26,
+                                "dateTimePrecision": 8,
+                                "needsQuotes": true,
+                                "parameterFormatType": "OneOrZero"
+                            },
+                            "inPK": false,
+                            "nullable": true,
+                            "autoIncrement": false,
+                            "default": "CURRENT_TIMESTAMP"
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 10 records retrieved in 2.155ms"
+                    },
+                    "totalRowCount": 10,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 1,
+                    "sql": "\nSELECT * FROM productos",
+                    "updatable": true,
+                    "fullTableName": "productos"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 52,
+                "end": 52,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": -1,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 53,
+                "end": 53,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
