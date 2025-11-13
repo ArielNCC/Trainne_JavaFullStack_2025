@@ -1,0 +1,44 @@
+# Archivos y carpetas a ignorar para proteger el entorno de desarrollo
+# Maven y Java
+*.class
+*.jar
+*.war
+*.ear
+/target/
+/.classpath
+/.project
+/.settings/
+/.idea/
+*.iml
+
+# Archivos de sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Logs y archivos temporales
+*.log
+/logs/
+
+# Credenciales y configuraciones sensibles
+*.env
+.env*
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+
+# Archivos de Docker
+*.pid
+
+# Backup y archivos temporales
+*~
+*.swp
+*.bak
+
+# Imágenes y evidencia
+img/
+
+# Wrapper de Maven
+.mvn/
