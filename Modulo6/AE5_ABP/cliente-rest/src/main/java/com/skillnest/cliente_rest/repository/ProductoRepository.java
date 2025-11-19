@@ -1,0 +1,9 @@
+package com.skillnest.cliente_rest.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.skillnest.cliente_rest.model.Producto;
+
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
+    
+}
