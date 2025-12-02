@@ -1,0 +1,560 @@
+{
+	"info": {
+		"name": "Sistema Catálogo - API REST",
+		"description": "Colección de pruebas para el Sistema Catálogo con API REST e interfaz JSP",
+		"version": "1.0.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set base URL",
+					"pm.environment.set('base_url', 'http://localhost:8081');"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8081",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Autenticación",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Login exitoso', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Token presente', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.exist;",
+									"    pm.environment.set('jwt_token', jsonData.token);",
+									"});",
+									"",
+									"pm.test('Rol correcto', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.rol).to.eql('ADMIN');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombreUsuario\": \"admin\",\n  \"contrasena\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				},
+				{
+					"name": "Login Usuario Normal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Login exitoso', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Rol correcto', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.rol).to.eql('USER');",
+									"    pm.environment.set('user_token', jsonData.token);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombreUsuario\": \"usuario1\",\n  \"contrasena\": \"usuario123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Productos - Lectura",
+			"item": [
+				{
+					"name": "Obtener todos los productos (paginado)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Estructura de paginación', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('productos');",
+									"    pm.expect(jsonData).to.have.property('currentPage');",
+									"    pm.expect(jsonData).to.have.property('totalPages');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos?page=0&size=10&sort=nombre&direction=asc",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos"],
+							"query": [
+								{"key": "page", "value": "0"},
+								{"key": "size", "value": "10"},
+								{"key": "sort", "value": "nombre"},
+								{"key": "direction", "value": "asc"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener todos los productos (sin paginación)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Es un array', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/all",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "all"]
+						}
+					}
+				},
+				{
+					"name": "Obtener producto por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Producto tiene estructura correcta', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('nombre');",
+									"    pm.expect(jsonData).to.have.property('precio');",
+									"    pm.expect(jsonData).to.have.property('stockDisponible');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Buscar productos por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/buscar?nombre=Teclado",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "buscar"],
+							"query": [
+								{"key": "nombre", "value": "Teclado"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Productos con stock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/con-stock",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "con-stock"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Productos - Admin",
+			"item": [
+				{
+					"name": "Crear producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 201', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Producto creado correctamente', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mensaje).to.include('exitosamente');",
+									"    pm.expect(jsonData.producto).to.have.property('id');",
+									"    pm.environment.set('new_product_id', jsonData.producto.id);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Smartphone Galaxy Test\",\n  \"descripcion\": \"Smartphone Android de prueba\",\n  \"precio\": 599999,\n  \"stockDisponible\": 15\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Producto actualizado', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mensaje).to.include('actualizado');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Smartphone Galaxy Actualizado\",\n  \"descripcion\": \"Smartphone Android actualizado\",\n  \"precio\": 649999,\n  \"stockDisponible\": 20\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/{{new_product_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "{{new_product_id}}"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar stock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Stock actualizado', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mensaje).to.include('Stock actualizado');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/1/stock?stock=50",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "1", "stock"],
+							"query": [
+								{"key": "stock", "value": "50"}
+							]
+						}
+					}
+				},
+				{
+					"name": "Eliminar producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Producto eliminado', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.mensaje).to.include('eliminado');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/{{new_product_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "{{new_product_id}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Pruebas de Error",
+			"item": [
+				{
+					"name": "Crear producto sin autenticación",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 401 Unauthorized', function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Producto sin auth\",\n  \"descripcion\": \"Test sin autenticación\",\n  \"precio\": 10000,\n  \"stockDisponible\": 5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos"]
+						}
+					}
+				},
+				{
+					"name": "Crear producto como usuario normal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 403 Forbidden', function () {",
+									"    pm.response.to.have.status(403);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Producto usuario\",\n  \"descripcion\": \"Test con usuario normal\",\n  \"precio\": 10000,\n  \"stockDisponible\": 5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos"]
+						}
+					}
+				},
+				{
+					"name": "Obtener producto inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 404 Not Found', function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test('Error message presente', function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.error).to.include('no encontrado');",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos/99999",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos", "99999"]
+						}
+					}
+				},
+				{
+					"name": "Crear producto con datos inválidos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status 400 Bad Request', function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"\",\n  \"descripcion\": \"Producto con datos inválidos\",\n  \"precio\": -100,\n  \"stockDisponible\": -5\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/productos",
+							"host": ["{{base_url}}"],
+							"path": ["api", "v1", "productos"]
+						}
+					}
+				}
+			]
+		}
+	]
+}

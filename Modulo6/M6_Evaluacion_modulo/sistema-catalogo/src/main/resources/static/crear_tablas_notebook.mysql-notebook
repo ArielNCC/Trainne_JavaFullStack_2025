@@ -1,0 +1,242 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "Script",
+    "content": "-- Crear la base de datos\nCREATE DATABASE IF NOT EXISTS rest_db\n    CHARACTER SET utf8mb4\n    COLLATE utf8mb4_unicode_ci;\n\nUSE rest_db;\n\n-- TABLA USUARIOS (para autenticación JWT)\nCREATE TABLE IF NOT EXISTS usuarios (\n    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,\n    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,\n    email VARCHAR(100) NOT NULL UNIQUE,\n    contrasena VARCHAR(255) NOT NULL,      -- hash bcrypt (~60 chars)\n    rol VARCHAR(50) NOT NULL DEFAULT 'USER',  -- ADMIN / USER\n    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n) ENGINE=InnoDB;\n\n-- TABLA PRODUCTOS\nCREATE TABLE IF NOT EXISTS productos (\n    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,\n    nombre VARCHAR(100) NOT NULL,\n    precio DECIMAL(10,2) NOT NULL,\n    descripcion TEXT\n) ENGINE=InnoDB;\n\n-- Contraseñas admin123 y usuario123\nINSERT INTO usuarios (nombre_usuario, email, contrasena, rol)\nVALUES \n('admin', 'admin@correo.com', '$2a$10$RIP4QWj2Uf0rVZz9E.j3de0hnqnJDnkx8qO39DxFRHRvKcYTCJLje', 'ADMIN'),\n('usuario1', 'usuario1@correo.com', '$2a$10$lywJTohz4XPYLpnhD9gN3OZx4hQqd9K/Maa/vAhPHJLoe46YfDlvO', 'USER');\n\nINSERT INTO productos (nombre, precio, descripcion) VALUES\n('Teclado mecánico', 49990, 'Teclado mecánico retroiluminado RGB'),\n('Mouse gamer', 29990, 'Mouse de alta precisión 16000 DPI'),\n('Pantalla LED 24\"', 129990, 'Monitor LED resolución 1080p');\n\nCOMMIT;\n\nSELECT * from productos;\nSELECT * from usuarios;\n\nUPDATE usuarios SET contrasena = '$2a$10$x8QuP4XX/nXm4.S40pz1fewjHjhCVVI0k9LHqmWQKd02CutLbo3E.' WHERE nombre_usuario = 'admin';\nUPDATE usuarios SET contrasena = '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi' WHERE nombre_usuario = 'usuario1';\nCOMMIT;\n\n",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 46,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 46,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 26,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -21
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 43,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 9,
+                            "resultId": "e311629e-86fb-4e55-ab98-4f1cf0530131",
+                            "content": "OK, 1 row affected in 25.143ms"
+                        },
+                        {
+                            "type": 2,
+                            "index": 10,
+                            "resultId": "246170b2-c440-4959-9905-cf784e5cacd9",
+                            "content": "OK, 1 row affected in 13.076ms"
+                        }
+                    ]
+                },
+                "currentHeight": 44.796875,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 121
+                        },
+                        "contentStart": 26,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 121,
+                            "length": 14
+                        },
+                        "contentStart": 123,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 135,
+                            "length": 425
+                        },
+                        "contentStart": 180,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 560,
+                            "length": 217
+                        },
+                        "contentStart": 581,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 777,
+                            "length": 321
+                        },
+                        "contentStart": 816,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1098,
+                            "length": 251
+                        },
+                        "contentStart": 1100,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1349,
+                            "length": 9
+                        },
+                        "contentStart": 1351,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1358,
+                            "length": 26
+                        },
+                        "contentStart": 1360,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1384,
+                            "length": 24
+                        },
+                        "contentStart": 1385,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1408,
+                            "length": 129
+                        },
+                        "contentStart": 1410,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 1537,
+                            "length": 131
+                        },
+                        "contentStart": 1538,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 44,
+                "end": 44,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "index": 0,
+                            "resultId": "3493eda2-358d-4fdd-faff-884236d98391",
+                            "content": "OK, 0 records retrieved in 2.714ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 7
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 45,
+                "end": 45,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 46,
+                "end": 46,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

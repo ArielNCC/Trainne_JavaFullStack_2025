@@ -1,0 +1,118 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# ===================================
+# SEGURIDAD - CREDENCIALES Y DATOS SENSIBLES
+# ===================================
+
+# Archivos de configuración con credenciales
+application-prod.properties
+application-local.properties
+application-secret.properties
+
+# IMPORTANTE: Si application.properties tiene credenciales reales,
+# considera usar variables de entorno en producción
+
+# Scripts SQL con datos sensibles (usuarios, passwords)
+**/usuarios_reales.sql
+**/create_users_prod.sql
+
+# Archivos de backup de base de datos
+*.sql.backup
+*.dump
+*.bak
+
+# Claves JWT, certificados y secretos
+jwt-secret.txt
+*.key
+*.pem
+*.p12
+*.crt
+*.jks
+*.db
+*.sqlite
+*.h2.db
+*.h2.mv.db
+*.h2.trace.db
+*.der
+*.srl
+*.csr
+*.keystore
+*.secret
+*.bak
+*.old
+*.tmp
+
+# Archivos de entorno y variables
+.env
+.env.*
+
+# Archivos de configuración con credenciales
+application.properties
+application-*.properties
+*.yml
+*.yaml
+
+# Node / Frontend
+node_modules/
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Prevent uploading sensitive files
+secrets/
+private/
+backup/
+
+# Ignore test output
+/surefire-reports/
+
+# Ignore database dumps
+*.sql
+*.dump
+
+# Ignore notebook checkpoints
+.ipynb_checkpoints/
+
+# ===================================
+# RECOMENDACIONES DE SEGURIDAD
+# ===================================
+# 1. Nunca subas credenciales reales de base de datos
+# 2. Usa variables de entorno para secretos (DB_PASSWORD, JWT_SECRET)
+# 3. Genera claves JWT únicas por ambiente
+# 4. No subas scripts SQL con usuarios/passwords reales
+# 5. Revisa los commits antes de push con: git diff --staged
