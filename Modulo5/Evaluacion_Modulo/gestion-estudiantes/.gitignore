@@ -1,0 +1,72 @@
+# Archivos y carpetas a ignorar para seguridad y privacidad
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDEs
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.idea
+*.iws
+*.iml
+*.ipr
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.vscode/
+
+# Archivos sensibles
+*.env
+*.env.local
+*.env.*.local
+*.secret
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+*.keystore
+
+# Configuración de base de datos y credenciales
+src/main/resources/application.properties
+src/main/resources/database.properties
+src/main/resources/database/*.sql
+src/main/resources/database/crear_usuario.sql
+
+# Archivos temporales y de sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Backup y dumps
+*.bak
+*.tmp
+*.swp
+*.swo
+*.old
+*.orig
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+
+# Node/npm
+node_modules/
+
+# Otros
+*.class
+*.jar
+*.war
+*.ear

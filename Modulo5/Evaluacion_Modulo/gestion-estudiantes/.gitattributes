@@ -1,0 +1,24 @@
+# Forzar fin de línea para scripts
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+# Ignorar archivos binarios y sensibles
+*.key binary
+*.pem binary
+*.crt binary
+*.p12 binary
+*.jks binary
+*.keystore binary
+*.env text
+*.secret text
+*.bak text
+*.tmp text
+*.log text
+
+# Forzar texto para archivos fuente
+*.java text
+*.xml text
+*.properties text
+*.sql text
+*.jsp text
+*.md text
