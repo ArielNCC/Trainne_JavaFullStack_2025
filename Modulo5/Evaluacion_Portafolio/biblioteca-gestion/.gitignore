@@ -1,0 +1,48 @@
+# --- Maven ---
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# --- IDEs (Eclipse, IntelliJ, VS Code, NetBeans) ---
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+bin/
+nbproject/private/
+build/
+dist/
+nbdist/
+.nb-gradle/
+
+# --- Archivos del Sistema Operativo ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Logs ---
+*.log
+
+# --- Seguridad y Credenciales (CRÍTICO) ---
+# Ignoramos el archivo de propiedades que contiene las credenciales REALES de la BD.
+# Cada desarrollador debe crear su propio archivo basado en el ejemplo o instrucciones.
+src/main/resources/database.properties
+
+# Archivos de entorno y certificados
+.env
+*.env
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+
+# --- Base de Datos ---
+# Permitimos el script de creación de estructura (schema)
+!src/main/resources/database/crear_bd.sql

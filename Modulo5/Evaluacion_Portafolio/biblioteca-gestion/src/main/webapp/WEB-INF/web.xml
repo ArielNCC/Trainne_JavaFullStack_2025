@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    
+    <display-name>Biblioteca Universitaria</display-name>
+    <description>Aplicación web para gestionar el catálogo de libros y solicitudes de préstamo</description>
+    
+    <!-- Página de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>catalogo</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Configuración de Servlet de Catálogo -->
+    <servlet>
+        <servlet-name>CatalogoServlet</servlet-name>
+        <servlet-class>cl.duoc.bibliotecagestion.controller.CatalogoServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>CatalogoServlet</servlet-name>
+        <url-pattern>/catalogo</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Configuración de Servlet de Solicitudes -->
+    <servlet>
+        <servlet-name>SolicitudServlet</servlet-name>
+        <servlet-class>cl.duoc.bibliotecagestion.controller.SolicitudServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>SolicitudServlet</servlet-name>
+        <url-pattern>/solicitudes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>SolicitudServlet</servlet-name>
+        <url-pattern>/solicitudes/*</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Configuración de codificación UTF-8 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>cl.duoc.bibliotecagestion.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Configuración de página de error -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/vistas/error404.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/vistas/error500.jsp</location>
+    </error-page>
+    
+    <!-- Timeout de sesión (30 minutos) -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>
