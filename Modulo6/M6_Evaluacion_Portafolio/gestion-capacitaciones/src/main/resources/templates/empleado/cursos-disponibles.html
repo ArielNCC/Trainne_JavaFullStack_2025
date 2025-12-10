@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Disponibles - Empleado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/panel">
+                <i class="bi bi-mortarboard-fill"></i> SkillNest
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/empleado/cursos">
+                            <i class="bi bi-book"></i> Cursos Disponibles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/empleado/mis-cursos">
+                            <i class="bi bi-bookmarks"></i> Mis Cursos
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}">Usuario</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person"></i> Mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post" class="d-inline">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">
+            <i class="bi bi-journal-text"></i> Cursos Disponibles para Inscripción
+        </h2>
+
+        <!-- Mensajes -->
+        <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle"></i> <span th:text="${mensaje}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle"></i> <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <!-- Grid de cursos -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" th:each="curso : ${cursos}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0" th:text="${curso.nombre}">Nombre del Curso</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-muted" th:text="${curso.descripcion}">Descripción del curso</p>
+                        
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-person-badge text-primary"></i>
+                                <strong>Instructor:</strong>
+                                <span th:if="${curso.instructor != null}" th:text="${curso.instructor.nombre + ' ' + curso.instructor.apellido}">Instructor</span>
+                                <span th:unless="${curso.instructor != null}">Por asignar</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-clock text-primary"></i>
+                                <strong>Duración:</strong>
+                                <span th:text="${curso.duracionHoras} + ' horas'">40 horas</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-calendar-event text-primary"></i>
+                                <strong>Inicio:</strong>
+                                <span th:text="${#temporals.format(curso.fechaInicio, 'dd/MM/yyyy')}">01/01/2025</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-calendar-check text-primary"></i>
+                                <strong>Fin:</strong>
+                                <span th:text="${#temporals.format(curso.fechaFin, 'dd/MM/yyyy')}">31/01/2025</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-people text-primary"></i>
+                                <strong>Cupos:</strong>
+                                <span th:text="${curso.cupoMaximo - (curso.inscripciones != null ? curso.inscripciones.size() : 0)} + ' disponibles'">
+                                    25 disponibles
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <form th:action="@{/empleado/cursos/inscribir/{id}(id=${curso.id})}" method="post">
+                            <button type="submit" class="btn btn-success w-100"
+                                    th:disabled="${curso.inscripciones != null && curso.inscripciones.size() >= curso.cupoMaximo}">
+                                <i class="bi bi-plus-circle"></i> Inscribirme
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div th:if="${#lists.isEmpty(cursos)}" class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="bi bi-info-circle"></i> No hay cursos disponibles en este momento
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

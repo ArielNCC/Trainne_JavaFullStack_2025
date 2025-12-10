@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Curso - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/panel">
+                <i class="bi bi-mortarboard-fill"></i> SkillNest Admin
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/cursos">
+                            <i class="bi bi-book"></i> Cursos
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span sec:authentication="name">Usuario</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person"></i> Mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post" class="d-inline">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-warning">
+                        <h4 class="mb-0">
+                            <i class="bi bi-pencil"></i> Editar Curso
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/cursos/actualizar}" th:object="${curso}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="nombre" class="form-label">Nombre del Curso *</label>
+                                    <input type="text" class="form-control" id="nombre" 
+                                           th:field="*{nombre}" required>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="descripcion" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="descripcion" rows="3"
+                                              th:field="*{descripcion}"></textarea>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="duracionHoras" class="form-label">Duración (horas) *</label>
+                                    <input type="number" class="form-control" id="duracionHoras" 
+                                           th:field="*{duracionHoras}" min="1" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="cupoMaximo" class="form-label">Cupo Máximo *</label>
+                                    <input type="number" class="form-control" id="cupoMaximo" 
+                                           th:field="*{cupoMaximo}" min="1" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="fechaInicio" class="form-label">Fecha Inicio *</label>
+                                    <input type="date" class="form-control" id="fechaInicio" 
+                                           th:field="*{fechaInicio}" required>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="fechaFin" class="form-label">Fecha Fin *</label>
+                                    <input type="date" class="form-control" id="fechaFin" 
+                                           th:field="*{fechaFin}" required>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="instructor" class="form-label">Instructor</label>
+                                    <select class="form-select" id="instructor" th:field="*{instructor.id}">
+                                        <option value="">Sin asignar</option>
+                                        <option th:each="instructor : ${instructores}" 
+                                                th:value="${instructor.id}"
+                                                th:text="${instructor.nombre + ' ' + instructor.apellido}"
+                                                th:selected="${curso.instructor != null && curso.instructor.id == instructor.id}">
+                                            Instructor
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="activo" 
+                                               th:field="*{activo}">
+                                        <label class="form-check-label" for="activo">
+                                            Curso activo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a href="/admin/cursos" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Cancelar
+                                </a>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="bi bi-save"></i> Actualizar Curso
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

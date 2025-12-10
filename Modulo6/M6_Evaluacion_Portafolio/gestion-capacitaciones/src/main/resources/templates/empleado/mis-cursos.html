@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Cursos - SkillNest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/panel">
+                <i class="bi bi-mortarboard-fill"></i> SkillNest
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/empleado/cursos">
+                            <i class="bi bi-book"></i> Cursos Disponibles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/empleado/mis-cursos">
+                            <i class="bi bi-bookmarks"></i> Mis Cursos
+                        </a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> <span th:text="${#authentication.name}">Usuario</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/perfil"><i class="bi bi-person"></i> Mi Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form th:action="@{/logout}" method="post" class="d-inline">
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="mb-4"><i class="bi bi-bookmarks"></i> Mis Cursos Inscritos</h2>
+
+        <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle"></i> <span th:text="${mensaje}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" th:each="inscripcion : ${inscripciones}">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0" th:text="${inscripcion.curso.nombre}">Nombre del Curso</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-muted" th:text="${inscripcion.curso.descripcion}">Descripción</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <strong>Estado:</strong> 
+                                <span class="badge bg-info" th:text="${inscripcion.estado}">INSCRITO</span>
+                            </li>
+                            <li class="mb-2">
+                                <strong>Fecha Inicio:</strong>
+                                <span th:text="${#temporals.format(inscripcion.curso.fechaInicio, 'dd/MM/yyyy')}">01/01/2025</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a th:href="@{/empleado/cursos/cancelar/{id}(id=${inscripcion.id})}" 
+                           class="btn btn-outline-danger w-100"
+                           onclick="return confirm('¿Está seguro de cancelar su inscripción?');">
+                            <i class="bi bi-x-circle"></i> Cancelar Inscripción
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12" th:if="${#lists.isEmpty(inscripciones)}">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No tienes inscripciones activas. 
+                    <a href="/empleado/cursos" class="alert-link">Ver cursos disponibles</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
